@@ -21,13 +21,11 @@ const path = require('path');
 const chalk = require('chalk');
 const spawn = require('react-dev-utils/crossSpawn');
 
-module.exports = function(
-  appPath,
-  appName,
-  verbose,
-  originalDirectory,
-  template
-) {
+module.exports = function(appPath,
+                          appName,
+                          verbose,
+                          originalDirectory,
+                          template) {
   const ownPackageName = require(path.join(
     __dirname,
     '..',
@@ -97,6 +95,18 @@ module.exports = function(
     }
   );
 
+  // Rename editorconfig
+  fs.move(
+    path.join(appPath, 'editorconfig'),
+    path.join(appPath, '.editorconfig'),
+    [],
+    err => {
+      if (err && err.code !== 'EEXIST') {
+        throw err;
+      }
+    }
+  );
+
   let command;
   let args;
 
@@ -133,7 +143,7 @@ module.exports = function(
   console.log(`Installing ${types.join(', ')} ${command}...`);
   console.log();
 
-  const proc = spawn.sync(command, args.concat(types), { stdio: 'inherit' });
+  const proc = spawn.sync(command, args.concat(types), {stdio: 'inherit'});
   if (proc.status !== 0) {
     console.error(`\`${command} ${args.concat(types).join(' ')}\` failed`);
     return;
