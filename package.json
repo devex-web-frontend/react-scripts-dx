@@ -1,5 +1,5 @@
 {
-  "name": "@devex-web-frontend/react-scripts-dx",
+  "name": "react-scripts-dx",
   "version": "2.4.0-1",
   "description": "Configuration and scripts for DX projects based on Create React App.",
   "repository": "devex-web-frontend/react-scripts-dx",
