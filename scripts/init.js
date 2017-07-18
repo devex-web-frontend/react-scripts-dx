@@ -95,20 +95,6 @@ module.exports = function(appPath,
     }
   );
 
-  // Rename editorconfig
-  console.log('Moving .editorconfig')
-  fs.move(
-    path.join(appPath, 'editorconfig'),
-    path.join(appPath, '.editorconfig'),
-    [],
-    err => {
-      if (err && err.code !== 'EEXIST') {
-        throw err;
-      }
-      console.log('Done', err);
-    }
-  );
-
   let command;
   let args;
 
